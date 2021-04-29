@@ -7,6 +7,7 @@ app.get("/", function(req, res){
     res.send("Welcome to Sindhu's Basic Site");
 })
 
+//resume handler
 app.get("/resume", function(req, res){
     filePathName=__dirname+"/resume.html"
     res.sendFile(filePathName);

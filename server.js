@@ -7,9 +7,11 @@ app.get("/", function(req, res){
     res.send("Welcome to Sindhu's Basic Site");
 })
 
+app.use(express.static(__dirname+"/frontend"));
+
 //resume handler
 app.get("/resume", function(req, res){
-    filePathName=__dirname+"/resume.html"
+    filePathName=__dirname+"/frontend/html/resume.html"
     res.sendFile(filePathName);
 })
 

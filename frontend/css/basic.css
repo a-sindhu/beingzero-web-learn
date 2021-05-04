@@ -1,3 +1,11 @@
+body{  
+    background-image: url("/img/basicimage.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}  
 h1{
     color:blueviolet;
 }
@@ -5,4 +13,7 @@ h1{
 a{
     font-size: large;
     color:darkviolet;
+}
+.basic{
+    text-align: center;
 }

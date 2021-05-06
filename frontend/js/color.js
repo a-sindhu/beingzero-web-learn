@@ -5,7 +5,7 @@ function onColorRangeChange(){
   let gE = document.getElementById("greenSlider");
   let bE = document.getElementById("blueSlider");
 
-  let rgbprop = "rgb("+rE.value+","+gE.value+","+bE.value+")";
+  let rgbprop = "rgb("+rE.value+", "+gE.value+", "+bE.value+")";
   console.log(rgbprop);
 
   var  outputR = document.querySelector('#outputR'),

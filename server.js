@@ -4,6 +4,93 @@ const app = express();
 
 app.use(express.static(__dirname+"/frontend"));
 
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use(function(req,res,next){
+    console.log("Request came");
+    next();
+});
+
+var todos=[];
+
+app.post('/api/todos',function(req,res){
+
+    var newTodo=req.body;
+    todos.push(newTodo);
+    res.json(newTodo);
+
+});
+
+app.get('/api/alltodos',function(req,res){
+
+    res.json(todos);
+});
+
+app.get('/api/todos/:todoId',function(req,res){
+
+    let todoId=req.params.todoId;
+    // console.log(todoId.value)
+    let idx=-1;
+
+    for(let i=0;i<todos.length;i++){
+        if(todos[i].id==todoId){
+            idx=i;
+            break;
+        }
+    }
+
+        if(idx==-1)
+            res.json({error:'user not found'});
+        else{
+            res.json(todos[idx]);
+            res.json({message:success});
+        }
+
+});
+
+app.put('/api/todos/:todoId',function(req,res){
+
+    let todoId=req.params.todoId;
+    let idx=-1;
+
+    for(let i=0;i<todos.length;i++){
+        if(todos[i].id==todoId){
+            idx=i;
+            break;
+        }
+    }
+
+    if(idx==-1)
+            res.json({error:'user not found'});
+    else{
+        todos[idx]=req.body;
+        res.json({message:success});
+    }
+});
+
+app.delete('/api/deltodos/:todoId',function(req,res){
+
+    let todoId=req.params.todoId;
+    let idx=-1;
+
+    for(let i=0;i<todos.length;i++){
+        if(todos[i].id==todoId){
+            idx=i;
+            break;
+        }
+    }
+
+    if(idx==-1)
+        res.json({error:'user not found'});
+    else{
+        res.json(todos[idx]);
+        todos.splice(idx,1);
+        res.json({message:success});
+    }
+
+
+});
+
 //home handler
 app.get("/", function(req, res){
     let filePathName1=__dirname+"/frontend/html/basic.html"
@@ -51,6 +138,11 @@ app.get("/pie", function(req, res){
 app.get("/todo", function(req, res){
     let filePathName8=__dirname+"/frontend/html/todo.html"
     res.sendFile(filePathName8);
+})
+
+app.get("/todoapi", function(req, res){
+    let filePathName9=__dirname+"/frontend/html/todoapi.html"
+    res.sendFile(filePathName9);
 })
 
 // Heroku will automatically set an environment variable called PORT

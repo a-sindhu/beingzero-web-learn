@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/todoapi.css"
+</head>
+
+<body>
+    <div class="basic">
+        <h1>TO_DO</h1>
+        <form class="form" action="/api/todos" method="POST">
+            <div>
+                <label class="label1" for="task">TASK</label>
+                <input class="text1" type="text" name="task" id="task"><br>
+            </div>
+            <br>
+            <div>
+                <label class="label2" for="id">ID</label>
+                <input class="text2" type="text" name="id" id="id"><br>
+            </div>
+            <br>
+            <input class="submit" type="submit" value="submit">
+            <div class="list"></div>
+        </form>
+    </div>
+    
+</body>
+</html>

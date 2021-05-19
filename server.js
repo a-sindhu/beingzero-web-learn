@@ -163,7 +163,7 @@ app.get("/todoapi", function(req, res){
     res.sendFile(filePathName9);
 })
 
-app.get("/crudd", function(req, res){
+app.get("/crudoperations", function(req, res){
     let filePathName10=__dirname+"/frontend/html/crud.html"
     res.sendFile(filePathName10);
 })

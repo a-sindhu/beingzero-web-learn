@@ -1,8 +1,22 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const courselib = require('./backend/lib/courselib');
+
+const password=process.env.Mongo_atlas_password;
+//contains db server-db name -username -password
+const connectionString="mongodb+srv://Sindhu:"+password+"@cluster0.09ahp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+// const dbOptions={};
+
+mongoose.connect(connectionString,{useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connection.on('connected',function(){
+    console.log("Database Connected");
+})
 
 const app = express();
 
 app.use(express.static(__dirname+"/frontend"));
+
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -13,7 +27,7 @@ app.use(function(req,res,next){
 
 var todos=[];
 
-app.post('/api/todos',function(req,res){
+app.post('/api/todo',function(req,res){
 
     var newTodo=req.body;
     todos.push(newTodo);
@@ -21,8 +35,7 @@ app.post('/api/todos',function(req,res){
 
 });
 
-app.get('/api/alltodos',function(req,res){
-
+app.get('/api/todos',function(req,res){
     res.json(todos);
 });
 
@@ -39,18 +52,22 @@ app.get('/api/todos/:todoId',function(req,res){
         }
     }
 
-        if(idx==-1)
-            res.json({error:'user not found'});
-        else{
-            res.json(todos[idx]);
-            res.json({message:success});
-        }
+    if(idx==-1)
+        res.json({error:'user not found'});
+    else{
+        res.json(todos[idx]);
+        res.json({message:success});
+    }
+    res
+        .status(404)
+        .send('Task not found');
 
 });
 
-app.put('/api/todos/:todoId',function(req,res){
+app.put('/api/todo/:todoId',function(req,res){
 
     let todoId=req.params.todoId;
+    let newtodo=req.body;
     let idx=-1;
 
     for(let i=0;i<todos.length;i++){
@@ -63,12 +80,12 @@ app.put('/api/todos/:todoId',function(req,res){
     if(idx==-1)
             res.json({error:'user not found'});
     else{
-        todos[idx]=req.body;
+        todos[idx]=newTodo;
         res.json({message:success});
     }
 });
 
-app.delete('/api/deltodos/:todoId',function(req,res){
+app.delete('/api/todo/:todoId',function(req,res){
 
     let todoId=req.params.todoId;
     let idx=-1;
@@ -140,10 +157,20 @@ app.get("/todo", function(req, res){
     res.sendFile(filePathName8);
 })
 
+//todoapi
 app.get("/todoapi", function(req, res){
     let filePathName9=__dirname+"/frontend/html/todoapi.html"
     res.sendFile(filePathName9);
 })
+
+app.get("/crudd", function(req, res){
+    let filePathName10=__dirname+"/frontend/html/crud.html"
+    res.sendFile(filePathName10);
+})
+
+app.get("/crud", courselib.getall);
+app.delete("/crud/:idd", courselib.deleteone);
+app.post("/crud",courselib.addnewone);
 
 // Heroku will automatically set an environment variable called PORT
 const PORT = process.env.PORT || 3000;

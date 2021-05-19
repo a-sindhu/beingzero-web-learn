@@ -12,19 +12,19 @@
 <body>
     <div class="basic">
         <h1>TO_DO</h1>
-        <form class="form" action="/api/todos" method="POST">
-            <div>
+        <form class="form" action="/api/todo" method="POST">
+            <div class="form-group">
                 <label class="label1" for="task">TASK</label>
-                <input class="text1" type="text" name="task" id="task"><br>
+                <input class="form-control" type="text" name="task" id="task"><br>
             </div>
             <br>
-            <div>
+            <div class="form-group">
                 <label class="label2" for="id">ID</label>
-                <input class="text2" type="text" name="id" id="id"><br>
+                <input class="form-control" type="text" name="id" id="id"><br>
             </div>
             <br>
-            <input class="submit" type="submit" value="submit">
-            <div class="list"></div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
         </form>
     </div>
     

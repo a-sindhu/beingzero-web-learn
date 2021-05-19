@@ -12,13 +12,12 @@ mongoose.connection.on('connected',function(){
     console.log("Database Connected");
 })
 
-
 const courselib = require('./backend/lib/courselib');
 const courseModel = require('./backend/models/courseModel');
 
-courselib.getAllCourses(function(err,courseArray){
-    console.log(courseArray);
-})
+// courselib.getAllCourses(function(err,courseArray){
+//     console.log(courseArray);
+// })
 
 // courselib.createCourse({coursename:'NodeJS'},function(err,course){
 //     console.log(course);

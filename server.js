@@ -171,6 +171,7 @@ app.get("/crudoperations", function(req, res){
 app.get("/crud", courselib.getall);
 app.delete("/crud/:idd", courselib.deleteone);
 app.post("/crud",courselib.addnewone);
+app.put("/crud/:idd", courselib.update);
 
 // Heroku will automatically set an environment variable called PORT
 const PORT = process.env.PORT || 3000;

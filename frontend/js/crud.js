@@ -43,30 +43,27 @@ $('#create-test').on('click', function () {
             alert(error);
             }
             });
-
-          
-
         // console.log(data);
-        //addRow(newTest)
+        addRow(newTest)
         $('#test-name').val('')
         $('#test-result').val('')
         $('.form-wrapper').addClass('hidden')
-        //view();
+       
     }
 })
 
 function view()
 {
-
+   
     $.ajax({
         url: "/crud",
         type: "GET",
         success: function(data) {
       //  alert(data.Articels);
-    
+      // alert(data);
        for(var i=0;i<data.length;i++) {
            console.log(data[i]);
-        addRow(data[i]);
+          addRow(data[i]);
         }
         },
         error: function (xhr, status, error) {
@@ -84,26 +81,22 @@ function addRow(obj) {
                    <td>${obj.name}</td>
                    <td id="result-${obj.id}" data-testid="${obj.id}"">${obj.articles}</td>
                    <td>
-                     <button class="btn btn-sm btn-danger" data-testid=${obj.id} id="${obj.id}">Delete</button>
+                     <button class="del btn btn-sm btn-danger" data-testid=${obj.id} id="${obj.id}">Delete</button>
                      <button class="btn btn-sm btn-info" disabled data-testid="${obj.id}"  id="save-${obj.id}">Save</button>
-
                      <button class="btn btn-sm btn-danger hidden" data-testid="${obj.id}"  id="cancel-${obj.id}">Cancel</button>
                      <button class="btn btn-sm btn-primary hidden" data-testid="${obj.id}"  id="confirm-${obj.id}">Confirm</button>
-
                    </td>
                </tr>`
     $('#tests-table').append(row)
 
-    $(`#${obj.id}`).on('click', deleteTest)
+    $(`.del`).on('click', deleteTest)
     $(`#cancel-${obj.id}`).on('click', cancelDeletion)
     $(`#confirm-${obj.id}`).on('click', confirmDeletion)
     $(`#save-${obj.id}`).on('click', saveUpdate)
-
-
     $(`#result-${obj.id}`).on('click', editResult)
 
 }
-
+var data;
 function editResult() {
     var testid = $(this).data('testid')
     var value = $(this).html()
@@ -115,14 +108,30 @@ function editResult() {
         var testid = $(this).data('testid')
         var saveBtn = $(`#save-${testid}`)
         saveBtn.prop('disabled', false)
-
+        data = { articles: JSON.parse($(".result").val())};
+        console.log($(".result").val());
     })
-
 }
-
 function saveUpdate() {
-    console.log('Saved!')
-    var testid = $(this).data('testid')
+   
+       
+   var testid = $(this).data('testid');
+   console.log(testid);
+   console.log(data);
+   $.ajax({
+    url: "/crud/"+testid,
+    type: "PUT",
+    data: data,
+    success: function (data) {
+   // alert(data);
+    data = JSON.parse(data);
+    },
+    error: function (xhr, status, error) {
+    alert(error);
+    }
+    });
+   
+
     var saveBtn = $(`#save-${testid}`)
     var row = $(`.test-row-${testid}`)
 
@@ -136,22 +145,9 @@ function saveUpdate() {
 
 function deleteTest() {
 
-    var testid = $(this).attr("id");
-    alert(testid);
-    $.ajax({
-        url: "/crud/"+testid,
-        type: "DELETE",
-        success: function (data) {
-        alert(data);
-        data = JSON.parse(data);
-        },
-        error: function (xhr, status, error) {
-        alert(error);
-        }
-        });
-      
- 
 
+    console.log("Coming here!");
+    var testid = $(this).attr("id");
     var deleteBtn = $(`#delete-${testid}`)
     var saveBtn = $(`#save-${testid}`)
     var cancelBtn = $(`#cancel-${testid}`)
@@ -162,7 +158,6 @@ function deleteTest() {
 
     cancelBtn.removeClass('hidden')
     confirmBtn.removeClass('hidden')
-    //view();
 }
 
 function cancelDeletion() {
@@ -182,6 +177,17 @@ function cancelDeletion() {
 
 function confirmDeletion() {
     var testid = $(this).data('testid')
+    $.ajax({
+        url: "/crud/"+testid,
+        type: "DELETE",
+        success: function (data) {
+        alert(data);
+        data = JSON.parse(data);
+        },
+        error: function (xhr, status, error) {
+        alert(error);
+        }
+        });
     var row = $(`.test-row-${testid}`)
     row.remove()
 

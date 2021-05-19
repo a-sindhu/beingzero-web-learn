@@ -2,9 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const courselib = require('./backend/lib/courselib');
 
-//const password=process.env.Mongo_atlas_password;
+const password=process.env.Mongo_atlas_password;
 //contains db server-db name -username -password
-const connectionString="mongodb+srv://Sindhu:Sindhu@1314@cluster0.09ahp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const connectionString="mongodb+srv://Sindhu:"+password+"@cluster0.09ahp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 // const dbOptions={};
 

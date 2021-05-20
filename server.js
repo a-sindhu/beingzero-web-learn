@@ -1,25 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const courselib = require('./backend/lib/courselib');
+const config = require('./backend/config/config');
+const dbConnect = require('./backend/db/dbconnect');
 
-const password=process.env.Mongo_atlas_password;
-//contains db server-db name -username -password
-const connectionString="mongodb+srv://Sindhu:"+password+"@cluster0.09ahp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
-// const dbOptions={};
-
-mongoose.connect(connectionString,{useNewUrlParser: true,useUnifiedTopology: true});
-mongoose.connection.on('connected',function(){
-    console.log("Database Connected");
-})
+dbConnect.connect();
 
 const app = express();
 
 app.use(express.static(__dirname+"/frontend"));
 
-
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+
 app.use(function(req,res,next){
     console.log("Request came");
     next();
@@ -174,9 +167,8 @@ app.post("/crud",courselib.addnewone);
 app.put("/crud/:idd", courselib.update);
 
 // Heroku will automatically set an environment variable called PORT
-const PORT = process.env.PORT || 3000;
 
 // Start the server
-app.listen(PORT, function(){
-    console.log("Server Starting running on http://localhost:"+PORT);
+app.listen(config.webPort, function(){
+    console.log("Server Starting running on http://localhost:"+config.webPort);
 })

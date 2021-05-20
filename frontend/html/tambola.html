@@ -1,0 +1,48 @@
+<html> 
+    <head> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tambola Game </title>  
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/css/tambola.css">
+
+
+    </head>
+    <body>  
+        <h1 align="center">TAMBOLA GAME</h1>
+        <div class="container" > 
+            <div class="bigNumberDisplay well well-lg">
+                <span id="numCounter" style="color:#194BB3">0</span>
+                <span class="mirage" id="mirageElement">19</span>
+                <div class="bingoNumberDesc" id="bingoWords"></div>
+            </div>
+            <div>
+                <input id="btnGenerate" type="button" value="Generate Number"/>
+            </div> 
+            <br/> 
+            <div class="row" > 
+                <div class="prev">
+                    <h2>PREVIOUS NUMBER</h2>
+                    <div id="prevNum" >0</div>
+                </div>
+                <div  class="col-md-10"> 
+                    <table>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr>  <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>
+                        <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> 
+                    </table>
+                </div>
+            </div> 
+            <br/> 
+        </div>
+        <script src="/js/tambola.js"></script> 
+    </body>
+</html>

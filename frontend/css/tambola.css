@@ -1,0 +1,52 @@
+body { 
+    padding-top: 70px; 
+}
+h1{
+    font-family:sans-serif
+}
+.divRules{
+    float:left;
+    width:20%;
+    text-align:left;
+    font-size:20px;
+}
+#prevNum{
+    font-size:90px;
+    color:#f00;
+}
+.bingoNumberDesc{
+    font-size:0.3em;
+    vertical-align: text-top;
+}
+div{
+    text-align: center;
+} 
+.bigNumberDisplay{
+    font-size: 8em;
+} 
+.numbersTable{
+    font-size: 1.6em;
+    width:100%
+} 
+table{
+    margin-left: auto;
+    margin-right: auto;
+} 
+table, tr, td{
+    border-collapse: collapse;
+    border: solid 1px #999;
+} 
+td{
+    min-width: 100px;
+    color: #fff;
+    font-size: 2em;
+} 
+td.selected{
+    color: #0D8930;
+} 
+
+.prev{
+    position: absolute;
+    top:300px;
+    left:90px;
+}

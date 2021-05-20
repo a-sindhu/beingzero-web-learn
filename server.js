@@ -4,19 +4,16 @@ const courselib = require('./backend/lib/courselib');
 const config = require('./backend/config/config');
 const dbConnect = require('./backend/db/dbconnect');
 
-dbConnect.connect();
-
 const app = express();
-
 app.use(express.static(__dirname+"/frontend"));
-
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-
 app.use(function(req,res,next){
     console.log("Request came");
     next();
 });
+
+dbConnect.connect();
 
 var todos=[];
 
@@ -37,14 +34,12 @@ app.get('/api/todos/:todoId',function(req,res){
     let todoId=req.params.todoId;
     // console.log(todoId.value)
     let idx=-1;
-
     for(let i=0;i<todos.length;i++){
         if(todos[i].id==todoId){
             idx=i;
             break;
         }
     }
-
     if(idx==-1)
         res.json({error:'user not found'});
     else{
@@ -62,14 +57,12 @@ app.put('/api/todo/:todoId',function(req,res){
     let todoId=req.params.todoId;
     let newtodo=req.body;
     let idx=-1;
-
     for(let i=0;i<todos.length;i++){
         if(todos[i].id==todoId){
             idx=i;
             break;
         }
     }
-
     if(idx==-1)
             res.json({error:'user not found'});
     else{
@@ -82,14 +75,12 @@ app.delete('/api/todo/:todoId',function(req,res){
 
     let todoId=req.params.todoId;
     let idx=-1;
-
     for(let i=0;i<todos.length;i++){
         if(todos[i].id==todoId){
             idx=i;
             break;
         }
     }
-
     if(idx==-1)
         res.json({error:'user not found'});
     else{
@@ -97,8 +88,6 @@ app.delete('/api/todo/:todoId',function(req,res){
         todos.splice(idx,1);
         res.json({message:success});
     }
-
-
 });
 
 //home handler
@@ -156,6 +145,7 @@ app.get("/todoapi", function(req, res){
     res.sendFile(filePathName9);
 })
 
+//crud handler
 app.get("/crudoperations", function(req, res){
     let filePathName10=__dirname+"/frontend/html/crud.html"
     res.sendFile(filePathName10);
@@ -166,7 +156,11 @@ app.delete("/crud/:idd", courselib.deleteone);
 app.post("/crud",courselib.addnewone);
 app.put("/crud/:idd", courselib.update);
 
-// Heroku will automatically set an environment variable called PORT
+//tambola handler
+app.get("/tambola", function(req, res){
+    let filePathName11=__dirname+"/frontend/html/tambola.html"
+    res.sendFile(filePathName11);
+})
 
 // Start the server
 app.listen(config.webPort, function(){
